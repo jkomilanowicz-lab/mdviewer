@@ -53,6 +53,7 @@ xcodebuild -scheme MDViewer -configuration Release build
 | Library | Version | License | Purpose |
 |---------|---------|---------|---------|
 | [marked](https://github.com/markedjs/marked) | 15.0.7 | MIT | Markdown → HTML parsing |
+| [DOMPurify](https://github.com/cure53/DOMPurify) | 3.4.12 | Apache-2.0 / MPL-2.0 | Sanitizes marked's HTML output before it reaches the DOM, closing an XSS gap where a crafted `.md` file's embedded `<script>`/event-handler HTML would otherwise execute unmodified |
 
 No Swift package dependencies. No external frameworks.
 

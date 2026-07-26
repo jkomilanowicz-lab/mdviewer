@@ -130,12 +130,15 @@ input[type="checkbox"] { margin-right: 0.5em; }
 </head>
 <body>
 <div id="content"></div>
+<script>{{PURIFY_JS}}</script>
 <script>{{MARKED_JS}}</script>
 <script>
-    // Content is from local user files rendered in a sandboxed WKWebView
+    // Markdown files can come from anywhere the user opens one from (Finder "Open With",
+    // downloads, email attachments, etc.) — marked.js passes raw HTML through unsanitized,
+    // so a crafted <script>/onerror payload in a .md file would otherwise execute here.
+    // DOMPurify strips that before it ever reaches innerHTML.
     const md = `{{MARKDOWN_CONTENT}}`;
-    const rendered = marked.parse(md);
-    document.getElementById('content').innerHTML = rendered;
+    document.getElementById('content').innerHTML = DOMPurify.sanitize(marked.parse(md));
 </script>
 </body>
 </html>
